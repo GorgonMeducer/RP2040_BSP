@@ -402,6 +402,8 @@ void LCD_1IN28_Clear(UWORD Color)
     UWORD j;
     static UWORD Image[LCD_1IN28_WIDTH];
     
+    Color = ((Color<<8)&0xff00)|(Color>>8);
+    
     for (j = 0; j < LCD_1IN28_WIDTH; j++) {
         Image[j] = Color;
     }

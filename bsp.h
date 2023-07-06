@@ -30,7 +30,7 @@
  *
  *     - __PICO_USE_STANDARD__      for the Raspberry Pi Pico only (default)
  *     - __PICO_USE_LCD_1IN3__      for Pico LCD 1.3inch
- *     - __PR2040_USE_LCD_1IN28__   for the RP2040 development kit: LCD 1.28inch
+ *     - __RP2040_USE_LCD_1IN28__   for the RP2040 development kit: LCD 1.28inch
  *
  */
 
