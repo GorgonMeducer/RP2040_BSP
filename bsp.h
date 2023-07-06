@@ -26,7 +26,25 @@
 #   include "./pico_lcd_1in3/Config/Dev_Config.h"
 #   include "./pico_lcd_1in3/LCD/LCD_1In3.h"
 #   include "./pico_lcd_1in3/GLCD_Config.h"
+
+
+
+#   if defined(__IS_COMPILER_ARM_COMPILER_5__) && __IS_COMPILER_ARM_COMPILER_5__
+#       pragma import(__pico_bsp_use_lcd_1in3__)
+#   elif    (defined(__GNUC__) || defined(__clang__))                           \
+        &&  (!defined(__IS_COMPILER_IAR__) || !__IS_COMPILER_IAR__)
+__asm(".global __pico_bsp_use_lcd_1in3__\n\t");
+#   endif
+
 #else
+
+#   if defined(__IS_COMPILER_ARM_COMPILER_5__) && __IS_COMPILER_ARM_COMPILER_5__
+#       pragma import(__pico_bsp_use_standard__)
+#   elif    (defined(__GNUC__) || defined(__clang__))                           \
+        &&  (!defined(__IS_COMPILER_IAR__) || !__IS_COMPILER_IAR__)
+__asm(".global __pico_bsp_use_standard__\n\t");
+#   endif
+
 #endif
 
 /*============================ MACROS ========================================*/

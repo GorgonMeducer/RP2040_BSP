@@ -677,7 +677,7 @@
   </Group>
 
   <Group>
-    <GroupName>pico_lcd_1in3</GroupName>
+    <GroupName>bsp</GroupName>
     <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
@@ -685,76 +685,52 @@
     <File>
       <GroupNumber>2</GroupNumber>
       <FileNumber>38</FileNumber>
-      <FileType>1</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\Pico-Template\bsp\pico_lcd_1in3\bsp_lcd_1in3.c</PathWithFileName>
-      <FilenameWithoutPath>bsp_lcd_1in3.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>2</GroupNumber>
-      <FileNumber>39</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\Pico-Template\bsp\pico_lcd_1in3\Config\DEV_Config.c</PathWithFileName>
-      <FilenameWithoutPath>DEV_Config.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>2</GroupNumber>
-      <FileNumber>40</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\Pico-Template\bsp\pico_lcd_1in3\LCD\LCD_1in3.c</PathWithFileName>
-      <FilenameWithoutPath>LCD_1in3.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\bsp.h</PathWithFileName>
+      <FilenameWithoutPath>bsp.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
   </Group>
 
   <Group>
-    <GroupName>pico_standard</GroupName>
+    <GroupName>Pico_LCD_1in3</GroupName>
     <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>3</GroupNumber>
-      <FileNumber>41</FileNumber>
+      <FileNumber>39</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\Pico-Template\bsp\pico_standard\bsp_standard.c</PathWithFileName>
-      <FilenameWithoutPath>bsp_standard.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\pico_lcd_1in3\bsp_lcd_1in3.c</PathWithFileName>
+      <FilenameWithoutPath>bsp_lcd_1in3.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
   </Group>
 
   <Group>
-    <GroupName>bsp</GroupName>
+    <GroupName>Pico_Standard</GroupName>
     <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>4</GroupNumber>
-      <FileNumber>42</FileNumber>
-      <FileType>5</FileType>
+      <FileNumber>40</FileNumber>
+      <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\Pico-Template\bsp\bsp.h</PathWithFileName>
-      <FilenameWithoutPath>bsp.h</FilenameWithoutPath>
+      <PathWithFileName>..\..\pico_standard\bsp_standard.c</PathWithFileName>
+      <FilenameWithoutPath>bsp_standard.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

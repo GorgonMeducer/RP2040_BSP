@@ -20,14 +20,13 @@
 #include <assert.h>
 #include "pico/stdlib.h"
 
-#include "../bsp.h"
-
-#if defined(__PICO_USE_LCD_1IN3__) && __PICO_USE_LCD_1IN3__
-
 
 #include "./Config/DEV_Config.h"
 #include "./LCD/LCD_1In3.h"
 #include "./GLCD_Config.h"
+
+#include "./LCD/LCD_1in3.c"
+#include "./Config/DEV_Config.c"
 
 /*============================ MACROS ========================================*/
 #define TOP         (0x1FFF)
@@ -46,10 +45,15 @@
 /*============================ PROTOTYPES ====================================*/
 /*============================ IMPLEMENTATION ================================*/
 
+__attribute__((used))
+void __pico_bsp_use_lcd_1in3__(void)
+{}
+
 /*! \brief set the 16-level led gradation
  *! \param hwLevel gradation
  *! \return none
  */
+static
 void set_led_gradation(uint16_t hwLevel)
 {
     static uint16_t s_hwCounter = 0;
@@ -102,6 +106,3 @@ void bsp_init(void)
         dev_key_init(n);
     }
 }
-
-
-#endif

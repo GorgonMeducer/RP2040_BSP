@@ -22,8 +22,6 @@
 
 #include "../bsp.h"
 
-#if defined(__PICO_USE_STANDARD__) && __PICO_USE_STANDARD__
-
 /*============================ MACROS ========================================*/
 #define TOP         (0x1FFF)
 
@@ -41,10 +39,16 @@
 /*============================ PROTOTYPES ====================================*/
 /*============================ IMPLEMENTATION ================================*/
 
+
+__attribute__((used))
+void __pico_bsp_use_standard__(void)
+{}
+
 /*! \brief set the 16-level led gradation
  *! \param hwLevel gradation
  *! \return none
  */
+static
 void set_led_gradation(uint16_t hwLevel)
 {
     static uint16_t s_hwCounter = 0;
@@ -81,5 +85,3 @@ void bsp_init(void)
     gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
 }
 
-
-#endif
