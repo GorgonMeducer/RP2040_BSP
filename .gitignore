@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+*.dep
+library_project/mdk/EventRecorderStub.scvd
+*.Scr
+*.sct
+*@*
+template.uvguix.*
