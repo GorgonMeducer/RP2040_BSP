@@ -22,6 +22,20 @@
 #ifndef __RP2040_BSP_H__
 #define __RP2040_BSP_H__
 
+
+/*
+ * How to use:
+ * --------------------------------
+ * Please define the following macros globally to select the corresponding bsp:
+ *
+ *     - __PICO_USE_STANDARD__      for the Raspberry Pi Pico only (default)
+ *     - __PICO_USE_LCD_1IN3__      for Pico LCD 1.3inch
+ *     - __PR2040_USE_LCD_1IN28__   for the RP2040 development kit: LCD 1.28inch
+ *
+ */
+
+
+
 #if defined(__PICO_USE_LCD_1IN3__) && __PICO_USE_LCD_1IN3__
 #   include "./pico_lcd_1in3/Config/Dev_Config.h"
 #   include "./pico_lcd_1in3/LCD/LCD_1In3.h"
@@ -34,6 +48,19 @@
 #   elif    (defined(__GNUC__) || defined(__clang__))                           \
         &&  (!defined(__IS_COMPILER_IAR__) || !__IS_COMPILER_IAR__)
 __asm(".global __pico_bsp_use_lcd_1in3__\n\t");
+#   endif
+
+#elif defined(__RP2040_USE_LCD_1IN28__) && __RP2040_USE_LCD_1IN28__
+#   include "./rp2040_lcd_1in28/Config/Dev_Config.h"
+#   include "./rp2040_lcd_1in28/LCD/LCD_1In28.h"
+#   include "./rp2040_lcd_1in28/GLCD_Config.h"
+
+
+#   if defined(__IS_COMPILER_ARM_COMPILER_5__) && __IS_COMPILER_ARM_COMPILER_5__
+#       pragma import(__rp2040_bsp_use_lcd_1in28__)
+#   elif    (defined(__GNUC__) || defined(__clang__))                           \
+        &&  (!defined(__IS_COMPILER_IAR__) || !__IS_COMPILER_IAR__)
+__asm(".global __rp2040_bsp_use_lcd_1in28__\n\t");
 #   endif
 
 #else
