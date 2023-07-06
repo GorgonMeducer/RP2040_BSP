@@ -54,3 +54,4 @@ library_project/mdk/EventRecorderStub.scvd
 *.sct
 *@*
 template.uvguix.*
+library_project/mdk/Objects/pr2040_bsp.build_log.htm
