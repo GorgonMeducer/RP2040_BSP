@@ -438,6 +438,15 @@ void GLCD_DrawBitmap(   int_fast16_t x, int_fast16_t y,
     DEV_SPI_Write_nByte(LCD_SPI_PORT, (uint8_t *)frame_ptr, height*width*2);
 }
 
+void Disp0_DrawBitmap(  int16_t x, 
+                        int16_t y, 
+                        int16_t width, 
+                        int16_t height, 
+                        const uint8_t *bitmap)
+{
+    GLCD_DrawBitmap(x, y, width, height, (uint16_t *)bitmap);
+}
+
 void LCD_1IN28_DisplayWindows(uint16_t Xstart, uint16_t Ystart, uint16_t Xend, uint16_t Yend, uint16_t *Image)
 {
     // display
