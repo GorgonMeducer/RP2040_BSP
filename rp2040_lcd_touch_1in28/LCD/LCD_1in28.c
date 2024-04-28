@@ -397,20 +397,20 @@ parameter:
 ******************************************************************************/
 void LCD_1IN28_Clear(uint16_t Color)
 {
-    uint16_t j;
-    uint16_t Image[LCD_1IN28_WIDTH*LCD_1IN28_HEIGHT];
+    static uint16_t Image[LCD_1IN28_WIDTH];
     
     Color = ((Color<<8)&0xff00)|(Color>>8);
-   
-    for (j = 0; j < LCD_1IN28_HEIGHT*LCD_1IN28_WIDTH; j++) {
+    
+    for (int j = 0; j < LCD_1IN28_WIDTH; j++) {
         Image[j] = Color;
     }
     
     LCD_1IN28_SetWindows(0, 0, LCD_1IN28_WIDTH, LCD_1IN28_HEIGHT);
     DEV_Digital_Write(LCD_DC_PIN, 1);;
-    for(j = 0; j < LCD_1IN28_HEIGHT; j++){
-        DEV_SPI_Write_nByte(LCD_SPI_PORT,(uint8_t *)&Image[j*LCD_1IN28_WIDTH], LCD_1IN28_WIDTH*2);
+    for(int j = 0; j < LCD_1IN28_HEIGHT; j++){
+        DEV_SPI_Write_nByte(LCD_SPI_PORT, (uint8_t *)Image, LCD_1IN28_WIDTH*2);
     }
+
 }
 
 /******************************************************************************
