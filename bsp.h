@@ -103,8 +103,10 @@ __asm(".global __pico_bsp_use_standard__\n\t");
 /*============================ MACROS ========================================*/
 
 
-#if defined(__PICO_USE_LCD_1IN3__) && __PICO_USE_LCD_1IN3__
-
+#if (defined(__PICO_USE_LCD_1IN3__) && __PICO_USE_LCD_1IN3__)                   \
+ || (defined(__RP2040_USE_LCD_1IN28__) && __RP2040_USE_LCD_1IN28__)             \
+ || (defined(__RP2040_USE_LCD_TOUCH_1IN28__) && __RP2040_USE_LCD_TOUCH_1IN28__) \
+ || (defined(__RP2040_USE_OLED_1IN3__) && __RP2040_USE_OLED_1IN3__)
 
 #else
 
