@@ -76,6 +76,19 @@ __asm(".global __rp2040_bsp_use_lcd_touch_1in28__\n\t");
 __asm(".global __rp2040_bsp_use_lcd_touch_1in28__\n\t");
 #   endif
 
+#elif defined(__RP2040_USE_OLED_1IN3__) && __RP2040_USE_OLED_1IN3__
+#   include "./rp2040_oled_1in3/Config/Dev_Config.h"
+#   include "./rp2040_oled_1in3/OLED/OLED_1in3_c.h"
+#   include "./rp2040_oled_1in3/GLCD_Config.h"
+
+
+#   if defined(__IS_COMPILER_ARM_COMPILER_5__) && __IS_COMPILER_ARM_COMPILER_5__
+#       pragma import(__rp2040_bsp_use_oled_1in3__)
+#   elif    (defined(__GNUC__) || defined(__clang__))                           \
+        &&  (!defined(__IS_COMPILER_IAR__) || !__IS_COMPILER_IAR__)
+__asm(".global __rp2040_bsp_use_oled_1in3__\n\t");
+#   endif
+
 #else
 
 #   if defined(__IS_COMPILER_ARM_COMPILER_5__) && __IS_COMPILER_ARM_COMPILER_5__
