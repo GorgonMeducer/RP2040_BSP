@@ -66,7 +66,7 @@ void OLED_WriteReg(uint8_t Reg)
 #endif
 }
 
-static void OLED_WriteData(uint8_t Data)
+void OLED_WriteData(uint8_t Data)
 {	
 #if USE_SPI
     OLED_DC_1;

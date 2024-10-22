@@ -60,6 +60,7 @@ void OLED_1in3_C_Init(void);
 void OLED_1in3_C_Clear(void);
 void OLED_1in3_C_Display(const UBYTE *Image);
 void OLED_WriteReg(uint8_t Reg);
+void OLED_WriteData(uint8_t Data);
 
 #endif  
 	 
