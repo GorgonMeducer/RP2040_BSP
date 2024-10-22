@@ -196,4 +196,64 @@ void OLED_1in3_C_Display(const UBYTE *Image)
     }   
 }
 
+void OLED_DrawBitmap(int16_t iX, int16_t iY, int16_t iWidth, int16_t iHeight, const uint8_t *pchBuffer)
+{
+    assert((iX & 0x7) == 0);
+    assert((iWidth & 0x7) == 0);
+    
+    int16_t iColoumOffset = ((iX >> 3) & 0x0F);
+    
+    for (int16_t i = 0; i < iHeight; i++) {
+    
+        /* set row */
+        int16_t iRow = GLCD_HEIGHT - (i + iY) - 1;
+        OLED_WriteReg(0x00 + (iRow & 0x0f));
+        OLED_WriteReg(0x10 + (iRow >> 4));
+
+        OLED_WriteReg(0xb0 | iColoumOffset);   //! set page address
+        
+        
+        for (int16_t j = 0; j < iWidth; j+=8) {
+            uint8_t chData = 0;
+            
+            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
+            chData >>= 1;
+            
+            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
+            chData >>= 1;
+            
+            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
+            chData >>= 1;
+            
+            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
+            chData >>= 1;
+            
+            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
+            chData >>= 1;
+            
+            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
+            chData >>= 1;
+            
+            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
+            chData >>= 1;
+            
+            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
+            
+            OLED_WriteData(chData);
+        
+        }
+    }
+    
+}
+
+void Disp0_DrawBitmap(  int16_t x, 
+                        int16_t y, 
+                        int16_t width, 
+                        int16_t height, 
+                        const uint8_t *bitmap)
+{
+    OLED_DrawBitmap(x, y, width, height, bitmap);
+}
+
+
 
