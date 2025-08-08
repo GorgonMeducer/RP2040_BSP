@@ -150,6 +150,8 @@ extern void bsp_init(void);
 
 extern void breath_led(void);
 
+extern bool Disp0_Flush(void);
+
 
 
 
