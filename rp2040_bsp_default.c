@@ -119,3 +119,9 @@ uint8_t DEV_Module_Init(void)
 __attribute__((weak))
 void DEV_Module_Exit(void) {}
 
+__attribute__((weak))
+bool Disp0_Flush(void) 
+{
+    return true;
+}
+

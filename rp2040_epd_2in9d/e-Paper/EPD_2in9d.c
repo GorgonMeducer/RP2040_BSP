@@ -175,7 +175,7 @@ function :	send command
 parameter:
      Reg : Command register
 ******************************************************************************/
-void EPD_2IN9D_SendCommand(UBYTE Reg)
+static void EPD_2IN9D_SendCommand(UBYTE Reg)
 {
     DEV_Digital_Write(EPD_DC_PIN, 0);
     DEV_Digital_Write(EPD_CS_PIN, 0);
@@ -188,7 +188,7 @@ function :	send data
 parameter:
     Data : Write data
 ******************************************************************************/
-void EPD_2IN9D_SendData(UBYTE Data)
+static void EPD_2IN9D_SendData(UBYTE Data)
 {
     DEV_Digital_Write(EPD_DC_PIN, 1);
     DEV_Digital_Write(EPD_CS_PIN, 0);
@@ -200,7 +200,7 @@ void EPD_2IN9D_SendData(UBYTE Data)
 function :	Wait until the busy_pin goes LOW
 parameter:
 ******************************************************************************/
-void EPD_2IN9D_ReadBusy(void)
+static void EPD_2IN9D_ReadBusy(void)
 {
     //Debug("e-Paper busy\r\n");
     UBYTE busy;
@@ -209,7 +209,7 @@ void EPD_2IN9D_ReadBusy(void)
         busy = DEV_Digital_Read(EPD_BUSY_PIN);
         busy =!(busy & 0x01);
     } while(busy);
-    DEV_Delay_ms(200);
+    //DEV_Delay_ms(200);
     //Debug("e-Paper busy release\r\n");
 }
 
@@ -430,6 +430,7 @@ void EPD_2IN9D_DisplayPart(UBYTE *Image)
     EPD_2IN9D_TurnOnDisplay();
 }
 
+static
 void EPD_SetWindow(int16_t iX, int16_t iY, int16_t iWidth, int16_t iHeight)
 {
     EPD_2IN9D_SetPartReg();
@@ -449,16 +450,16 @@ void EPD_SetWindow(int16_t iX, int16_t iY, int16_t iWidth, int16_t iHeight)
     EPD_2IN9D_SendData(0x28);
 }
 
-#if 0
 void EPD_DrawBitmap(int16_t iX, int16_t iY, int16_t iWidth, int16_t iHeight, const uint8_t *pchBuffer)
 {
     assert((iX & 0x7) == 0);
     assert((iWidth & 0x7) == 0);
 
+
     iX += iWidth - 1;
 
     int16_t iRotatedX = iY;
-    int16_t iRotatedY = EPD_2IN9D_WIDTH - iX - 1;
+    int16_t iRotatedY = EPD_2IN9D_HEIGHT - iX - 1;
     int16_t iRotatedWidth = iHeight;
     int16_t iRotatedHeight = iWidth;
 
@@ -468,63 +469,50 @@ void EPD_DrawBitmap(int16_t iX, int16_t iY, int16_t iWidth, int16_t iHeight, con
 
     for (int16_t i = 0; i < iRotatedHeight; i++) {
 
-        for (int16_t j = 0; j < iRotatedWidth;) {
+        for (int16_t j = 0; j < iRotatedWidth; j+= 8) {
             uint8_t chData = 0;
-        
-        #if 0
-            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+
+            const uint8_t *pchBlock = &pchBuffer[iWidth - i - 1 + j * iWidth];
+            
+            chData |= *pchBlock >= 0x80 ? 0x01 : 0x00;
+            pchBlock += iWidth;
             chData <<= 1;
             
-            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+            chData |= *pchBlock >= 0x80 ? 0x01 : 0x00;
+            pchBlock += iWidth;
             chData <<= 1;
             
-            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+            chData |= *pchBlock >= 0x80 ? 0x01 : 0x00;
+            pchBlock += iWidth;
             chData <<= 1;
             
-            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+            chData |= *pchBlock >= 0x80 ? 0x01 : 0x00;
+            pchBlock += iWidth;
             chData <<= 1;
             
-            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+            chData |= *pchBlock >= 0x80 ? 0x01 : 0x00;
+            pchBlock += iWidth;
             chData <<= 1;
             
-            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+            chData |= *pchBlock >= 0x80 ? 0x01 : 0x00;
+            pchBlock += iWidth;
             chData <<= 1;
             
-            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+            chData |= *pchBlock >= 0x80 ? 0x01 : 0x00;
+            pchBlock += iWidth;
             chData <<= 1;
             
-            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
-        #endif
-        
-            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
-            chData <<= 1;
-            
-            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
-            chData <<= 1;
-            
-            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
-            chData <<= 1;
-            
-            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
-            chData <<= 1;
-            
-            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
-            chData <<= 1;
-            
-            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
-            chData <<= 1;
-            
-            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
-            chData <<= 1;
-            
-            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
+            chData |= *pchBlock >= 0x80 ? 0x01 : 0x00;
+            pchBlock += iWidth;
 
             EPD_2IN9D_SendData(chData);
         
         }
     }
     
-     EPD_2IN9D_TurnOnDisplay();
+    EPD_2IN9D_SendCommand(0x11);
+    EPD_2IN9D_SendCommand(0x92);
+
 }
 
 void Disp0_DrawBitmap(  int16_t x, 
@@ -535,7 +523,37 @@ void Disp0_DrawBitmap(  int16_t x,
 {
     EPD_DrawBitmap(x, y, width, height, bitmap);
 }
-#endif
+
+bool Disp0_Flush(void)
+{
+    static enum {
+        START = 0,
+        WAIT_BUSY,
+    } s_chState = START;
+    
+    switch (s_chState) {
+        case START:
+            s_chState++;
+            EPD_2IN9D_SendCommand(0x12);
+            //fall-through;
+        case WAIT_BUSY:
+            EPD_2IN9D_SendCommand(0x71);
+            uint8_t busy = gpio_get(26);
+            busy =!(busy & 0x01);
+            if (busy) {
+                break;
+            }
+            s_chState = START;
+            return true;
+
+        default:
+            s_chState = START;
+            break;
+    }
+
+    return false;
+}
+
 
 /******************************************************************************
 function :	Enter sleep mode

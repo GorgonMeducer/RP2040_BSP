@@ -60,42 +60,6 @@ __attribute__((used))
 void __rp2040_bsp_use_badger_rp2040__(void)
 {}
 
-
-/*! \brief set the 16-level led gradation
- *! \param hwLevel gradation
- *! \return none
- */
-static
-void set_led_gradation(uint16_t hwLevel)
-{
-    static uint16_t s_hwCounter = 0;
-    
-    if (hwLevel >= s_hwCounter) {
-        gpio_put(PICO_DEFAULT_LED_PIN, 1);
-    } else {
-        gpio_put(PICO_DEFAULT_LED_PIN, 0);
-    }
-    
-    s_hwCounter++;
-    s_hwCounter &= TOP;
-}
-
-void breath_led(void)
-{
-    static uint16_t s_hwCounter = 0;
-    static int16_t s_nGray = (TOP >> 1);
-    
-    s_hwCounter++;
-    if (!(s_hwCounter & (_BV(10)-1))) {
-        s_nGray++; 
-        if (s_nGray == TOP) {
-            s_nGray = 0;
-        }
-    }
-
-    set_led_gradation(ABS(s_nGray - (TOP >> 1)));
-}
-
 void bsp_init(void)
 {
     gpio_init(PICO_DEFAULT_LED_PIN);
