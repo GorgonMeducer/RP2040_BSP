@@ -120,7 +120,7 @@ UBYTE DEV_Module_Init(void)
     // GPIO Config
     DEV_GPIO_Init();
     
-    spi_init((spi_inst_t *)SPI_PORT, 4000 * 1000);
+    spi_init((spi_inst_t *)SPI_PORT, 12000 * 1000);
     gpio_set_function(EPD_CLK_PIN, GPIO_FUNC_SPI);
     gpio_set_function(EPD_MOSI_PIN, GPIO_FUNC_SPI);
     
