@@ -243,7 +243,6 @@ void OLED_DrawBitmap(int16_t iX, int16_t iY, int16_t iWidth, int16_t iHeight, co
         
         }
     }
-    
 }
 
 void Disp0_DrawBitmap(  int16_t x, 
