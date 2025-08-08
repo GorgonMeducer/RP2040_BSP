@@ -434,17 +434,19 @@ static
 void EPD_SetWindow(int16_t iX, int16_t iY, int16_t iWidth, int16_t iHeight)
 {
     EPD_2IN9D_SetPartReg();
-    EPD_2IN9D_SendCommand(0x91);		//This command makes the display enter partial mode
-    EPD_2IN9D_SendCommand(0x90);		//resolution setting
-    EPD_2IN9D_SendData(iX);           //x-start
-    EPD_2IN9D_SendData(iX + iWidth - 1);       //x-end
+    EPD_2IN9D_SendCommand(0x91);            //This command makes the display enter partial mode
+    EPD_2IN9D_SendCommand(0x90);            //resolution setting
+    
+
+    EPD_2IN9D_SendData(iX);                 //x-start
+    EPD_2IN9D_SendData(iX + iWidth - 1);    //x-end
 
     EPD_2IN9D_SendData(iY >> 8);
-    EPD_2IN9D_SendData(iY & 0xFF);     //y-start
+    EPD_2IN9D_SendData(iY & 0xFF);          //y-start
     
-    iY += iWidth - 1;
+    iY += iHeight - 1;
     EPD_2IN9D_SendData(iY);
-    EPD_2IN9D_SendData(iY & 0xFF);  //y-end
+    EPD_2IN9D_SendData(iY & 0xFF);          //y-end
     EPD_2IN9D_SendData(0x28);
 }
 
@@ -454,15 +456,23 @@ void EPD_DrawBitmap(int16_t iX, int16_t iY, int16_t iWidth, int16_t iHeight, con
     assert((iX & 0x7) == 0);
     assert((iWidth & 0x7) == 0);
 
-    EPD_SetWindow(iX, iY, iWidth, iHeight);
+    iX += iWidth - 1;
+
+    int16_t iRotatedX = iY;
+    int16_t iRotatedY = EPD_2IN9D_WIDTH - iX - 1;
+    int16_t iRotatedWidth = iHeight;
+    int16_t iRotatedHeight = iWidth;
+
+    EPD_SetWindow(iRotatedX, iRotatedY, iRotatedWidth, iRotatedHeight);
     
     EPD_2IN9D_SendCommand(0x13);
 
-    for (int16_t i = 0; i < iHeight; i++) {
+    for (int16_t i = 0; i < iRotatedHeight; i++) {
 
-        for (int16_t j = 0; j < iWidth; j+=8) {
+        for (int16_t j = 0; j < iRotatedWidth;) {
             uint8_t chData = 0;
         
+        #if 0
             chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
             chData <<= 1;
             
@@ -485,6 +495,30 @@ void EPD_DrawBitmap(int16_t iX, int16_t iY, int16_t iWidth, int16_t iHeight, con
             chData <<= 1;
             
             chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+        #endif
+        
+            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
+            chData <<= 1;
+            
+            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
+            chData <<= 1;
+            
+            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
+            chData <<= 1;
+            
+            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
+            chData <<= 1;
+            
+            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
+            chData <<= 1;
+            
+            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
+            chData <<= 1;
+            
+            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
+            chData <<= 1;
+            
+            chData |= pchBuffer[(iWidth - 1 - i) + (j++) * iWidth] >= 0x80 ? 0x01 : 0x00;
 
             EPD_2IN9D_SendData(chData);
         
