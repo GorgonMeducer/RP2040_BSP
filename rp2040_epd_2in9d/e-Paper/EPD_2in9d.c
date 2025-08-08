@@ -175,7 +175,7 @@ function :	send command
 parameter:
      Reg : Command register
 ******************************************************************************/
-static void EPD_2IN9D_SendCommand(UBYTE Reg)
+void EPD_2IN9D_SendCommand(UBYTE Reg)
 {
     DEV_Digital_Write(EPD_DC_PIN, 0);
     DEV_Digital_Write(EPD_CS_PIN, 0);
@@ -188,7 +188,7 @@ function :	send data
 parameter:
     Data : Write data
 ******************************************************************************/
-static void EPD_2IN9D_SendData(UBYTE Data)
+void EPD_2IN9D_SendData(UBYTE Data)
 {
     DEV_Digital_Write(EPD_DC_PIN, 1);
     DEV_Digital_Write(EPD_CS_PIN, 0);
@@ -291,7 +291,7 @@ static void EPD_2IN9D_SetPartReg(void)
 function :	Turn On Display
 parameter:
 ******************************************************************************/
-static void EPD_2IN9D_TurnOnDisplay(void)
+void EPD_2IN9D_TurnOnDisplay(void)
 {
     EPD_2IN9D_SendCommand(0x12);		 //DISPLAY REFRESH
     DEV_Delay_ms(10);     //!!!The delay here is necessary, 200uS at least!!!
@@ -430,7 +430,6 @@ void EPD_2IN9D_DisplayPart(UBYTE *Image)
     EPD_2IN9D_TurnOnDisplay();
 }
 
-static
 void EPD_SetWindow(int16_t iX, int16_t iY, int16_t iWidth, int16_t iHeight)
 {
     EPD_2IN9D_SetPartReg();
@@ -450,7 +449,7 @@ void EPD_SetWindow(int16_t iX, int16_t iY, int16_t iWidth, int16_t iHeight)
     EPD_2IN9D_SendData(0x28);
 }
 
-
+#if 0
 void EPD_DrawBitmap(int16_t iX, int16_t iY, int16_t iWidth, int16_t iHeight, const uint8_t *pchBuffer)
 {
     assert((iX & 0x7) == 0);
@@ -536,6 +535,7 @@ void Disp0_DrawBitmap(  int16_t x,
 {
     EPD_DrawBitmap(x, y, width, height, bitmap);
 }
+#endif
 
 /******************************************************************************
 function :	Enter sleep mode

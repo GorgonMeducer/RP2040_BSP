@@ -66,4 +66,10 @@ void EPD_2IN9D_Display(UBYTE *Image);
 void EPD_2IN9D_DisplayPart(UBYTE *Image);
 void EPD_2IN9D_Sleep(void);
 
+extern void EPD_2IN9D_TurnOnDisplay(void);
+extern void EPD_SetWindow(int16_t iX, int16_t iY, int16_t iWidth, int16_t iHeight);
+extern void EPD_2IN9D_SendCommand(UBYTE Reg);
+extern void EPD_2IN9D_SendData(UBYTE Data);
+extern void EPD_2IN9D_ReadBusy(void);
+
 #endif
