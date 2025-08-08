@@ -501,7 +501,6 @@ void Disp0_DrawBitmap(  int16_t x,
                         const uint8_t *bitmap)
 {
     EPD_DrawBitmap(x, y, width, height, bitmap);
-    DEV_Delay_ms(100);
 }
 
 /******************************************************************************
