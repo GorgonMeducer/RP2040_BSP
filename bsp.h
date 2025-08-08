@@ -91,7 +91,7 @@ __asm(".global __rp2040_bsp_use_oled_1in3__\n\t");
 
 #elif defined(__RP2040_USE_EPD_2IN9D__) && __RP2040_USE_EPD_2IN9D__
 #   include "./rp2040_epd_2in9d/Config/Dev_Config.h"
-#   include "./rp2040_epd_2in9d/e-Paper/OLED_1in3_c.h"
+#   include "./rp2040_epd_2in9d/e-Paper/EPD_2in9d.h"
 #   include "./rp2040_epd_2in9d/GLCD_Config.h"
 
 
@@ -104,7 +104,7 @@ __asm(".global __rp2040_bsp_use_epd_2in9d__\n\t");
 
 #elif defined(__RP2040_USE_BADGER__) && __RP2040_USE_BADGER__
 #   include "./rp2040_epd_2in9d/Config/Dev_Config.h"
-#   include "./rp2040_epd_2in9d/e-Paper/OLED_1in3_c.h"
+#   include "./rp2040_epd_2in9d/e-Paper/EPD_2in9d.h"
 #   include "./badger_rp2040/GLCD_Config.h"
 
 
