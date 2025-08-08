@@ -462,30 +462,30 @@ void EPD_DrawBitmap(int16_t iX, int16_t iY, int16_t iWidth, int16_t iHeight, con
 
         for (int16_t j = 0; j < iWidth; j+=8) {
             uint8_t chData = 0;
+        
+            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+            chData <<= 1;
             
-            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
-            chData >>= 1;
+            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+            chData <<= 1;
             
-            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
-            chData >>= 1;
+            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+            chData <<= 1;
             
-            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
-            chData >>= 1;
+            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+            chData <<= 1;
             
-            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
-            chData >>= 1;
+            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+            chData <<= 1;
             
-            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
-            chData >>= 1;
+            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+            chData <<= 1;
             
-            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
-            chData >>= 1;
+            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+            chData <<= 1;
             
-            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
-            chData >>= 1;
-            
-            chData |= *pchBuffer++ >= 0x80 ? 0x80 : 0x00;
-            
+            chData |= *pchBuffer++ >= 0x80 ? 0x01 : 0x00;
+
             EPD_2IN9D_SendData(chData);
         
         }
@@ -501,7 +501,7 @@ void Disp0_DrawBitmap(  int16_t x,
                         const uint8_t *bitmap)
 {
     EPD_DrawBitmap(x, y, width, height, bitmap);
-    DEV_Delay_ms(500);
+    DEV_Delay_ms(100);
 }
 
 /******************************************************************************
